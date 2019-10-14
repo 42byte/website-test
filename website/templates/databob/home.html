@@ -1,0 +1,23 @@
+{% extends "databob/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    {% if categories %}
+
+        <div>
+        {% for cat in categories %}
+            <div>
+                <h2>{{cat.cat}}</h2>
+                <img src="{{ cat.img.url }}" alt="Cat Pic" width="200" height="200">
+                {{cat.upvotes}}
+            </div>    
+
+        {% endfor %}
+     </div>
+    {% else %}
+        <h1>keine liste</h1>
+    {% endif %}
+
+
+{% endblock %}
