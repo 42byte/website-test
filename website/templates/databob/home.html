@@ -1,23 +1,41 @@
 {% extends "databob/base.html" %}
 {% load static %}
 
-{% block content %}
 
-    {% if categories %}
+{% block filter-area %}
+    {% if cat_filter %}
 
-        <div>
-        {% for cat in categories %}
-            <div>
-                <h2>{{cat.cat}}</h2>
-                <img src="{{ cat.img.url }}" alt="Cat Pic" width="200" height="200">
-                {{cat.upvotes}}
-            </div>    
+    <div>
+        <form method="get">
+            {{ cat_filter.form.as_p }}
+            <button type="submit">Search</button>
+        </form>
+        
 
-        {% endfor %}
-     </div>
     {% else %}
-        <h1>keine liste</h1>
+    <h1>keine liste</h1>
     {% endif %}
-
+    
+</div>
 
 {% endblock %}
+
+
+
+{% block db-area %}
+    {% if cat_filter %}
+        <ul class="pcat-all">
+            {% for cf in cat_filter.qs %}    
+                <li class="pcat-container">
+                        <h2><a href="{% url 'databob-home' %}">{{ cf.cat }}</a></h2>
+                        <img src="{{ cf.img.url }}" alt="Cat Pic" class="pcat-pic">
+                        <p><a href="{% url 'databob-home' %}"> {{ cf.upvotes }}</a></p>
+                    </li>
+                {% endfor %}
+                </ul>
+
+        {% else %}
+            <h1>keine liste</h1>
+        {% endif %}
+{% endblock %}
+

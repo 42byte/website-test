@@ -1,0 +1,43 @@
+/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/*/
+
+
+.main {
+    display: grid;
+    grid-template-areas: "filter db dynamic";
+    grid-template-columns: 25% 50% 25%;
+    margin: 15vh 5vw 0 5vw;
+}
+
+.pcat-filter {
+    border-style: solid;
+    border-width: 1px;
+    border-color: grey;
+    border-radius: 1%;
+
+}
+
+.pcat-all {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: white;
+    align-content: flex-start;
+    grid-area: db;
+}
+
+.pcat-container {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #333;
+    margin: 5px;
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.pcat-pic {
+    width: 150px;
+}

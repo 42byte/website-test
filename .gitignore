@@ -1,2 +1,4 @@
 /db_testing/secret.txt
 db.sqlite3
+/website/media/*
+

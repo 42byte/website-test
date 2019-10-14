@@ -3,7 +3,7 @@ from django.db import models
 
 class PCat(models.Model):
     cat = models.CharField(max_length=100)
-    img = models.ImageField(upload_to="PCat_img/")
+    img = models.ImageField(upload_to="PCat_img/", blank=True, default="PCat_img/test.jpg")
     content = models.TextField(blank=True)
     upvotes = models.IntegerField(default=0)
 
@@ -13,7 +13,7 @@ class PCat(models.Model):
 class PSubCat(models.Model):
     cat = models.ForeignKey(PCat, on_delete = models.SET_DEFAULT, default = 0)
     subcat = models.CharField(max_length=100)
-    img = models.ImageField(upload_to="PSubCat_img/")
+    img = models.ImageField(upload_to="PSubCat_img/", blank=True)
     content = models.TextField(blank=True)
     upvotes = models.IntegerField(default=0)
 

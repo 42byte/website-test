@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import PCat, PSubCat, Product
 
-# Register your models here.
+
+admin.site.register([PCat, PSubCat, Product])
