@@ -31,22 +31,23 @@ class Product(models.Model):
     upvotes = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.gtin
+        return self.GTIN
 
 
 class UserProfile(models.Model):
-    username = models.CharField(max_length=100)
-    bio = models.TextField()
-    products_watchlist = models.ManyToManyField(Product)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(default="This is my awesome bio...")
+    products_watchlist = models.ManyToManyField(Product, blank=True)
 
     def __str__(self):
-        return self.username
+        return self.user.username
 
 
 #signal that creates a UserProfile everytime a new User is created. 
 def create_user_profile(sender, **kwargs):
     if kwargs["created"]:
-        user_profil = UserProfile.objects.create(user=kwargs["instance"])
+        q= UserProfile.objects.create(user=kwargs["instance"])
+        q.save()
 
 post_save.connect(create_user_profile, sender = User)
 
@@ -61,7 +62,8 @@ class Product_Commments(models.Model):
     user = models.ForeignKey(UserProfile, on_delete = models.SET_DEFAULT, default = "none")
 
     def __str__(self):
-        return self.product
+        show = str(self.id)
+        return show
 
 
 
