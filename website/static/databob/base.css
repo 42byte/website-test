@@ -1,6 +1,5 @@
 /* https://css-tricks.com/snippets/css/a-guide-to-flexbox/*/
 
-
 .main {
     display: grid;
     grid-template-areas: "filter db dynamic";
@@ -40,4 +39,35 @@
 
 .pcat-pic {
     width: 150px;
+}
+
+
+
+.navbar {
+    background-color: black;
+    color: white;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    overflow: hidden;
+
+}
+
+.nav-items {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+.navbar li {
+    margin: 1vh 5vw 2vh 5vw;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+
+
+
 }

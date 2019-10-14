@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 
 class PCat(models.Model):
@@ -32,8 +34,34 @@ class Product(models.Model):
         return self.gtin
 
 
-""" class Commments(models.Model):
+class UserProfile(models.Model):
+    username = models.CharField(max_length=100)
+    bio = models.TextField()
+    products_watchlist = models.ManyToManyField(Product)
+
+    def __str__(self):
+        return self.username
+
+
+#signal that creates a UserProfile everytime a new User is created. 
+def create_user_profile(sender, **kwargs):
+    if kwargs["created"]:
+        user_profil = UserProfile.objects.create(user=kwargs["instance"])
+
+post_save.connect(create_user_profile, sender = User)
+
+
+
+
+
+class Product_Commments(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     comment = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
- """
+    user = models.ForeignKey(UserProfile, on_delete = models.SET_DEFAULT, default = "none")
+
+    def __str__(self):
+        return self.product
+
+
+
