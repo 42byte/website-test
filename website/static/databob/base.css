@@ -7,13 +7,34 @@
     margin: 15vh 5vw 0 5vw;
 }
 
-.pcat-filter {
-    border-style: solid;
-    border-width: 1px;
-    border-color: grey;
-    border-radius: 1%;
+
+
+
+/*______________________
+FILTER AREA
+_____________________*/
+
+.filter {
+    grid-area: filter;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
 
 }
+
+#filter-item {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #333;
+    padding: 10px 10px 10px 20px;
+    margin: 5px;
+
+}
+
+
+/*______________________
+DATABASE AREA
+_____________________*/
 
 .pcat-all {
     display: flex;
@@ -22,6 +43,7 @@
     background-color: white;
     align-content: flex-start;
     grid-area: db;
+    margin: 0px;
 }
 
 .pcat-container {
@@ -42,6 +64,89 @@
 }
 
 
+
+/*______________________
+DYNAMIC AREA
+_____________________*/
+
+
+.dynamic-all {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    background-color: white;
+    grid-area: dynamic;
+    margin: 0px;
+}
+
+.dynamic-container {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #333;
+    margin: 5px;
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.main_product {
+    display: grid;
+    grid-template-areas: "product dynamic";
+    grid-template-columns: 75% 25%;
+    margin: 15vh 5vw 0 5vw;
+    justify-items: stretch;
+}
+
+
+
+
+/*______________________
+PRODUCT AREA
+_____________________*/
+.product-area {
+    display: grid;
+    grid-template-areas: "first second third";
+    grid-template-columns: 33% 33% 33%;
+    grid-area: product;
+    margin: 0px;
+
+}
+
+.product-area li {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #333;
+    margin: 5px;
+    padding: 10px 10px 10px 10px;
+    list-style-type: none;    
+}
+
+#item-first {
+    grid-area: first;
+}
+
+#item-second {
+    grid-area: second;
+}
+
+#item-third {
+    grid-area: third;
+}
+
+
+.item-img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
+    
+}
+
+/*______________________
+NAVBAR
+_____________________*/
 
 .navbar {
     background-color: black;
@@ -67,7 +172,4 @@
 .navbar a {
     text-decoration: none;
     color: white;
-
-
-
 }

@@ -1,0 +1,43 @@
+{% extends "databob/base_product.html" %}
+{% load static %}
+
+
+{% block product-area %}
+
+
+    <ul class="product-area">
+        <li id="item-first">
+            {% if product.img %}
+                <img src="{{ product.img.url }}" alt="{{product.Name}}" class="item-img">
+            {% else %}
+                <p>image</p>
+            {% endif %}
+        </li>
+
+        <li id="item-second">
+            <h1 class="item-header">{{product.Name}}</h1>
+            <h2 class="item-subheader">{{product.Brand}}</h2>
+        </li>
+
+        <li id="item-third">
+            <p>additional information</p>
+        </li>
+    </ul>
+
+{% endblock %}
+
+
+{% block dynamic-area %}
+
+    <div class="dynamic-all">
+        {% for c in comments %}
+            <div class="dynamic-container">
+            
+                <p>{{ c.comment }}</p>
+            
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
