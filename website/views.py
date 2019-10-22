@@ -43,4 +43,21 @@ class ProductDetail(generic.detail.DetailView):
             return render(request, "<h1>error</h1>")
 
 
+class UserDetail(generic.detail.DetailView):
+    template_name = "databob/user_detail.html"
+    model = UserProfile
+
+    def get(self, request, pk=None, **kwargs):
+        if pk:
+            comments = Product_Commments.objects.all().filter(user=pk)
+            user = UserProfile.objects.get(pk=pk)
+
+            return render(request, self.template_name, context={
+                "user": user,
+                "comments": comments
+            })
+        else: 
+            return render(request, "<h1>error</h1>")
+
+
 #class ProfileDetail(generic.detail.DetailView):

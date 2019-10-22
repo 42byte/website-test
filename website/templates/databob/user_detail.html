@@ -1,0 +1,35 @@
+{% extends 'databob/base.html' %}
+{% load static %}
+
+{% block dynamic-area %}
+
+
+
+<div class="usr-template">
+    <div class="user-information">
+        {{user.user}}
+        {{user.bio}}
+    </div>
+    <div class="user-db">
+        {% for item in user.watchlist %}
+            <p>{{item}}</p>
+        {% endfor %}
+    </div>
+    <div class="user-comments">
+        {% for comment in comments %}
+            <p>{{comment.product}}</p>
+            <p>{{comment.comment}}</p>
+            <br>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}

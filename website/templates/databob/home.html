@@ -52,7 +52,7 @@
             <li class="dynamic-container">
                 <p> <a href="{% url 'databob-sbd' pk=c.product.pk %}">{{ c.product }}</a> </p>
                 <p> {{ c.comment }} </p>
-                <p> {{ c.user }} </p>
+                <p> <a href="{% url 'databob-usr' pk=c.user.pk %}">{{ c.user }} </a> </p>
 
             </li>
         
