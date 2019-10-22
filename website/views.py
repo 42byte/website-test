@@ -1,11 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
 
 from .filter import PCat_filter
-
 from .models import PCat, PSubCat, Product, Product_Commments, UserProfile
 
 
+
+#______________________________________________________________
 class Home(generic.list.ListView):
     template_name = "databob/home.html"
     model = PCat
@@ -25,6 +29,7 @@ class Home(generic.list.ListView):
 
 
 
+#_______________________________________________________________
 
 class ProductDetail(generic.detail.DetailView):
     template_name = "databob/product_detail.html"
@@ -43,6 +48,7 @@ class ProductDetail(generic.detail.DetailView):
             return render(request, "<h1>error</h1>")
 
 
+#______________________________________________________________
 class UserDetail(generic.detail.DetailView):
     template_name = "databob/user_detail.html"
     model = UserProfile
@@ -60,4 +66,51 @@ class UserDetail(generic.detail.DetailView):
             return render(request, "<h1>error</h1>")
 
 
-#class ProfileDetail(generic.detail.DetailView):
+def register(request):
+    if request.method == "POST":      
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get("username")
+            messages.success(request, f"New Account created: {username}")
+            login(request, user)
+            messages.info(request, f"You are now logged in as: {username}")
+            return redirect("databob-home")
+        else:
+            for msg in form.error_messages:
+                messages.error(request, f"{msg}: {form.error_messages}")
+
+
+    form = UserCreationForm
+    return render(request, 
+            "databob/register.html", 
+            context={"form":form})
+
+
+def logout_user(request):
+    logout(request)
+    messages.info(request, f"Logged out sucessfully")
+    return redirect("databob-home")
+
+
+def login_user(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data = request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"You are now logged in as: {username}")
+                return redirect("databob-home")
+            else:
+                messages.error(request, "Invalid username or password")
+        else:
+            messages.error(request, "Invalid username or password")
+
+    form = AuthenticationForm()
+    return render(request, "databob/login.html", context={"form":form})
+
+
+

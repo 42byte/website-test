@@ -1,0 +1,17 @@
+{% extends 'databob/base.html' %}
+{% load static %}
+
+
+{% block dynamic-area %}
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button type="submit">Register</button>
+
+</form>
+
+
+<p>If you already have an account, <a href="{% url 'databob-login' %}">login</a> instead.</p>
+
+{% endblock %}

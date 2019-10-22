@@ -1,0 +1,7 @@
+{% load static %}
+
+{% if messages %}
+    {% for message in messages %}
+        <console class="log">{{message}}</console>
+    {% endfor %}
+{% endif %}

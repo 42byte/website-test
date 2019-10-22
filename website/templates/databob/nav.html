@@ -5,8 +5,14 @@
     <ul class="nav-items">
         <li><a href="{% url 'databob-home' %}">Home</a></li>
         <li>Search</li>
-        <li>Messages</li>
-        <li>Profile</li>
+        {% if user.is_authenticated %}
+            <li>Messages</li>
+            <li>Profile</li>
+            <li><a href="{% url 'databob-logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'databob-register' %}">Register</a></li>
+            <li><a href="{% url 'databob-login' %}">Login</a></li>
+        {% endif %}
     </ul>
 </nav>
 
